@@ -12,7 +12,7 @@ const fadeImages = [
 const fadeProperties = {
   duration: 4000,
   autoplay: true,
-  arrows: false,
+  arrows: true,
   transitionDuration: 1000,
   infinite: true,
   indicators: false,
@@ -20,17 +20,22 @@ const fadeProperties = {
 
 export const Slideshow = () => {
   return (
-    <Fade {...fadeProperties}>
-      {fadeImages.map((img, idx) => (
-        <div className="each-fade" key={idx}>
-          <div className="image-container" style={{ width: 800, height: 800 }}>
-            <img
-              src={img}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
+    <div>
+      <Fade {...fadeProperties}>
+        {fadeImages.map((img, idx) => (
+          <div className="each-fade" key={idx}>
+            <div
+              className="image-container"
+              style={{ width: '100%', height: 800 }}
+            >
+              <img
+                src={img}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
           </div>
-        </div>
-      ))}
-    </Fade>
+        ))}
+      </Fade>
+    </div>
   )
 }

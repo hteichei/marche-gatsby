@@ -21,7 +21,7 @@ const ProductGrid = () => {
                 localFile {
                   childImageSharp {
                     fluid(maxWidth: 910) {
-                      ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                      ...GatsbyImageSharpFluid
                     }
                   }
                 }
