@@ -4,12 +4,18 @@ import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles({
   container: {
-    margin: '40px 120px 50px 0',
+    margin: '0 120px 50px 0',
   },
   inputRoot: {
     padding: 7.5,
-    borderRadius: 0,
-    border: '1px solid black',
+    borderRadius: 2,
+    border: '1px solid #636363',
+  },
+  form: {
+    width: 300,
+    '@media (max-width: 400px)': {
+      width: 200,
+    },
   },
 })
 
@@ -25,7 +31,11 @@ export const Subscribe = () => {
 
   return (
     <div className={classes.container}>
-      <form htmlFor="subscribe" onSubmit={handleSubmit} style={{ width: 300 }}>
+      <form
+        htmlFor="subscribe"
+        onSubmit={handleSubmit}
+        className={classes.form}
+      >
         <div
           style={{
             display: 'flex',
@@ -33,7 +43,12 @@ export const Subscribe = () => {
             marginBottom: 7.5,
           }}
         >
-          <label htmlFor="subscribleForm">Join our Mailing List</label>
+          <label
+            htmlFor="subscribleForm"
+            style={{ fontWeight: 300, letterSpacing: 1.3 }}
+          >
+            Join our Mailing List
+          </label>
           <TextField
             id="subscribeForm"
             placeholder="frank@email.com"
@@ -57,8 +72,8 @@ export const Subscribe = () => {
 
 export const StyledButton = withStyles({
   root: {
-    borderRadius: 0,
-    border: '1px solid black',
+    borderRadius: 2,
+    border: '1px solid #636363',
     color: 'black',
     fontFamily: 'Oswald',
     padding: 4,

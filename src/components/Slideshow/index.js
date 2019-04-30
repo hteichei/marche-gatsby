@@ -1,5 +1,24 @@
 import React from 'react'
-import { Fade } from 'react-slideshow-image'
+import { Slide } from 'react-slideshow-image'
+import { makeStyles } from '@material-ui/styles'
+
+const useStyles = makeStyles({
+  imageContainer: {
+    width: '100%',
+    height: '100vh',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  slideContainer: {
+    marginTop: 60,
+    '@media (max-width: 768px)': {
+      marginTop: 0,
+    },
+  },
+})
 
 const fadeImages = [
   require('./assets/IMG_1.jpg'),
@@ -18,24 +37,28 @@ const fadeProperties = {
   indicators: false,
 }
 
+const properties = {
+  duration: 5000,
+  autoplay: true,
+  arrows: true,
+  transitionDuration: 350,
+  infinite: true,
+  indicators: false,
+}
+
 export const Slideshow = () => {
+  const classes = useStyles()
   return (
-    <div>
-      <Fade {...fadeProperties}>
+    <div className={classes.slideContainer}>
+      <Slide {...properties}>
         {fadeImages.map((img, idx) => (
           <div className="each-fade" key={idx}>
-            <div
-              className="image-container"
-              style={{ width: '100%', height: 800 }}
-            >
-              <img
-                src={img}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
+            <div className={classes.imageContainer}>
+              <img src={img} className={classes.image} />
             </div>
           </div>
         ))}
-      </Fade>
+      </Slide>
     </div>
   )
 }
