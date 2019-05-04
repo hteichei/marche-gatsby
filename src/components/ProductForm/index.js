@@ -8,11 +8,11 @@ const ProductForm = props => {
   const [quantity, setQuantity] = useState(1)
   const [variant, setVariant] = useState(props.product.variants[0])
   const context = useContext(StoreContext)
-  
+
   const hasVariants = props.product.variants.length > 1
   const productVariant =
-  context.client.product.helpers.variantForOptions(props.product, variant) ||
-  variant
+    context.client.product.helpers.variantForOptions(props.product, variant) ||
+    variant
   const [available, setAvailable] = useState(productVariant.availableForSale)
 
   useEffect(() => {
@@ -23,12 +23,15 @@ const ProductForm = props => {
     setVariant(defaultOptionValues)
   }, [])
 
-  useEffect(() => {
-    checkAvailability(props.product.shopifyId)
-  }, [productVariant])
+  useEffect(
+    () => {
+      checkAvailability(props.product.shopifyId)
+    },
+    [productVariant]
+  )
 
   const checkAvailability = productId => {
-    context.client.product.fetch(productId).then((product) => {
+    context.client.product.fetch(productId).then(product => {
       // this checks the currently selected variant for availability
       const result = product.variants.filter(
         variant => variant.id === productVariant.shopifyId
@@ -36,7 +39,7 @@ const ProductForm = props => {
       setAvailable(result[0].available)
     })
   }
- 
+
   const handleQuantityChange = event => {
     setQuantity(event.target.value)
   }
@@ -79,7 +82,7 @@ const ProductForm = props => {
         onChange={handleQuantityChange}
         value={quantity}
       />
-      <br/>
+      <br />
       <button type="submit" disabled={!available} onClick={handleAddToCart}>
         Add to Cart
       </button>

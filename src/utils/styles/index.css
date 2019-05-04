@@ -1,0 +1,131 @@
+@font-face {
+  font-family: 'CustomOne';
+  src: url('./fonts/vremena.woff2') format('woff2'),
+    url('./fonts/vremena.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CustomOneBold';
+  src: url('./fonts/vremena_bold.woff2') format('woff2'),
+    url('./fonts/vremena_bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CustomOneBolder';
+  src: url('./fonts/vremena_bolder.woff2') format('woff2'),
+    url('./fonts/vremena_bolder.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CustomTwo';
+  src: url('./fonts/iowanold.woff2') format('woff2'),
+    url('./fonts/iowanold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CustomTwoBold';
+  src: url('./fonts/iowanold_bold.woff2') format('woff2'),
+    url('./fonts/iowanold_bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CustomThree';
+  src: url('./fonts/BELLABOO-Regular.woff') format('woff2');
+  /* url('./fonts/iowanold_bold.woff') format('woff'); */
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  speak: none;
+}
+
+@font-face {
+  font-family: 'CustomFour';
+  src: url('./fonts/proxima_soft_medium.woff2') format('woff2'),
+    url('./fonts/proxima_soft_medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  speak: none;
+}
+
+@font-face {
+  font-family: 'CustomFourBold';
+  src: url('./fonts/proxima_soft_bold.woff2') format('woff2'),
+    url('./fonts/proxima_soft_bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  speak: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.table-header-cell {
+  text-align: center !important;
+}
+
+.rc-pagination {
+  text-align: center !important;
+}
+
+.paypal-button-text {
+  display: none !important;
+}
+
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+video::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+}
+video::-webkit-media-controls-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}

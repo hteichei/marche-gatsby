@@ -1,10 +1,7 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { makeStyles } from '@material-ui/styles'
 
-import { Slideshow } from '../components/Slideshow'
-import { NavbarContainer } from '../components'
-
+import ProductGrid from '../components/ProductGrid'
 import SEO from '../components/seo'
 
 const useStyles = makeStyles({
@@ -16,9 +13,9 @@ const SecondPage = () => {
   return (
     <>
       <SEO title="Page two" />
-      {/* <NavbarContainer /> */}
-      <Slideshow />
-      {/* <Link to="/">Go back to the homepage</Link> */}
+      <div style={{ margin: '0 60px' }}>
+        <ProductGrid />
+      </div>
     </>
   )
 }
