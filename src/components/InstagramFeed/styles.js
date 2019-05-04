@@ -15,6 +15,10 @@ export const useStyles = makeStyles({
     alignItems: 'center',
     width: '100%',
     height: 240,
+    '@media (max-width: 780px)': {
+      height: 480,
+      flexWrap: 'wrap',
+    },
   },
   showBlur: {
     height: '100%',
@@ -23,6 +27,9 @@ export const useStyles = makeStyles({
     top: 0,
     left: 0,
     backgroundColor: 'rgba(0,0,0,.4)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   hideBlur: {
     display: 'none',
@@ -40,6 +47,21 @@ export const useStyles = makeStyles({
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
+    },
+  },
+  '@media (max-width: 780px)': {
+    flexContainer: {
+      height: 480,
+      flexWrap: 'wrap',
+      alignContent: 'center',
+    },
+    link: {
+      height: '33.332vw',
+      width: '33.332%',
+    },
+    container: {
+      height: 550,
+      paddingTop: 40,
     },
   },
 })

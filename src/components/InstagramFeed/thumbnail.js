@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/styles'
+import { PropTypes } from 'prop-types'
+import { FaInstagram } from 'react-icons/fa'
 
 import { useStyles } from './styles'
 
 export const Thumb = ({ id, original, caption }) => {
-  const classes = useStyles()
+  // Hooks
   const [blur, setBlur] = useState(false)
+  const classes = useStyles()
   return (
     <a
       href={`https://www.instagram.com/p/${id}`}
@@ -14,16 +16,17 @@ export const Thumb = ({ id, original, caption }) => {
       className={classes.link}
       onMouseEnter={() => setBlur(true)}
       onMouseLeave={() => setBlur(false)}
-      style={{
-        position: 'relative',
-        height: '16.666vw',
-        width: '16.666%',
-        border: '2px solid #fff',
-        textDecoration: 'none',
-      }}
     >
-      <div className={blur ? classes.showBlur : classes.hideBlur} />
+      <div className={blur ? classes.showBlur : classes.hideBlur}>
+        <FaInstagram color="#fff" size={35} />
+      </div>
       <img src={original} alt={caption} className={classes.img} />
     </a>
   )
+}
+
+Thumb.propTypes = {
+  id: PropTypes.string,
+  original: PropTypes.string,
+  caption: PropTypes.string,
 }
