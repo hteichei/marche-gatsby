@@ -1,33 +1,36 @@
 import React from 'react'
+import { makeStyles } from '@material-ui/styles'
 
-import { Img } from '../../utils/styles'
-import { useInstaData } from './graphql'
 import { useStyles } from './styles'
+import { useInstaData } from './graphql'
+import { Thumb } from './thumbnail'
 
 const InstaFeed = () => {
   // Hooks
   const data = useInstaData()
   const classes = useStyles()
   return (
-    <div className={classes.flexContainer}>
-      {data.allInstaNode.edges.map((x, idx) => {
-        return (
-          <div className={classes.container} key={idx}>
-            <a
-              href={`https://www.instagram.com/p/${x.node.id}`}
-              rel="noopener noreferrer"
-              target="_blank"
-              className={classes.link}
-            >
-              <Img
-                className={classes.image}
-                fixed={x.node.localFile.childImageSharp.fixed}
-                alt={x.node.caption}
-              />
-            </a>
-          </div>
-        )
-      })}
+    <div className={classes.container}>
+      <p style={{ marginBottom: 0 }}>Instagram</p>
+      <div
+        style={{
+          width: 25,
+          borderBottom: '1px solid black',
+          margin: '5px 0 20px',
+        }}
+      />
+      <div className={classes.flexContainer}>
+        {data.allInstaNode.edges.map(x => {
+          return (
+            <Thumb
+              key={x.node.id}
+              id={x.node.id}
+              original={x.node.original}
+              caption={x.node.caption}
+            />
+          )
+        })}
+      </div>
     </div>
   )
 }

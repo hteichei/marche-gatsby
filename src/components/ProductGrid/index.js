@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 
 import { useShopData } from './graphql'
-import Product from './product'
+import Product from '../Product'
 
 const useStyles = makeStyles({
   flexContainer: {

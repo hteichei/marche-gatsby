@@ -4,7 +4,7 @@ export const useInstaData = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        allInstaNode {
+        allInstaNode(limit: 6) {
           edges {
             node {
               id
@@ -15,13 +15,6 @@ export const useInstaData = () => {
               original
               timestamp
               caption
-              localFile {
-                childImageSharp {
-                  fixed(width: 150, height: 150) {
-                    ...GatsbyImageSharpFixed
-                  }
-                }
-              }
             }
           }
         }

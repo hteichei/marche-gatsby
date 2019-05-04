@@ -1,27 +1,44 @@
 import { makeStyles } from '@material-ui/styles'
 
 export const useStyles = makeStyles({
+  container: {
+    height: 400,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   flexContainer: {
     display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '100%',
+    height: 240,
   },
-  container: {
-    width: 250,
-    height: 400,
-    margin: '20px 20px 40px',
+  showBlur: {
+    height: '100%',
+    width: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    backgroundColor: 'rgba(0,0,0,.4)',
   },
-  image: {
-    borderRadius: 5,
-    boxShadow: '6px 6px 10px -6px rgba(0,0,0,0.53)',
+  hideBlur: {
+    display: 'none',
+  },
+  img: {
+    height: '100%',
+    width: '100%',
+    objectFit: 'cover',
   },
   link: {
-    color: 'black',
-    margin: '5px 0',
+    position: 'relative',
+    height: '16.666vw',
+    width: '16.666%',
+    border: '2px solid #fff',
     textDecoration: 'none',
-    letterSpacing: 1.5,
     '&:hover': {
-      color: 'rgba(0,0,0,.5)',
       textDecoration: 'none',
     },
   },
