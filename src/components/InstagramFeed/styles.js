@@ -27,9 +27,9 @@ export const useStyles = makeStyles({
     top: 0,
     left: 0,
     backgroundColor: 'rgba(0,0,0,.4)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // display: 'flex',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   hideBlur: {
     display: 'none',
