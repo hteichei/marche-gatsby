@@ -28,9 +28,6 @@ const useStyles = makeStyles({
     letterSpacing: 1.3,
     display: 'flex',
     justifyContent: 'space-between',
-    '@media (max-width: 768px)': {
-      backgroundColor: 'transparent !important',
-    },
   },
   logo: {
     width: 150,
@@ -56,26 +53,16 @@ export const Example = () => {
           />
         </NavbarBrand>
         <NavbarToggler onClick={() => toggle()} />
-        <Collapse
-          isOpen={isOpen}
-          navbar
-          // style={{ backgroundColor: '#fff', width: '100%' }}
-        >
-          <Nav
-            className="ml-auto"
-            navbar
-            // style={{
-            //   width: isOpen ? 220 : '100%',
-            //   display: 'flex',
-            //   justifyContent: 'space-between',
-            //   padding: 0,
-            // }}
-          >
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Shop
               </DropdownToggle>
               <DropdownMenu right>
+                <DropdownItem>
+                  <NavLink href="/products">All</NavLink>
+                </DropdownItem>
                 <DropdownItem>Dresses</DropdownItem>
                 <DropdownItem>Shirts</DropdownItem>
                 <DropdownItem>Jumpers</DropdownItem>

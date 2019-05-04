@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import StoreContext, { defaultStoreContext } from '../context/StoreContext'
-import Header from '../components/Header'
 import { Footer, NavbarContainer } from '../components'
 import { GlobalStyle } from '../utils/styles'
 
@@ -139,7 +138,7 @@ class Layout extends React.Component {
               <NavbarContainer />
               <div
                 style={{
-                  paddingTop: 0,
+                  paddingTop: 60,
                 }}
               >
                 {children}

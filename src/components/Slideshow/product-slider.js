@@ -2,6 +2,8 @@ import React from 'react'
 import { Slide } from 'react-slideshow-image'
 import { makeStyles } from '@material-ui/styles'
 
+import { Img } from '../../utils/styles'
+
 const useStyles = makeStyles({
   imageContainer: {
     width: '100%',
@@ -15,13 +17,19 @@ const useStyles = makeStyles({
 })
 
 export const Slideshow = ({ images, slideProperties }) => {
+  alert('hello')
+  console.log('images', images)
   const classes = useStyles()
   return (
     <Slide {...slideProperties}>
       {images.map((img, idx) => (
         <div key={idx}>
           <div className={classes.imageContainer}>
-            <img src={img} className={classes.image} />
+            <Img
+              fluid={img.localFile.childImageSharp.fluid}
+              key={img.id}
+              alt={img.product.title}
+            />
           </div>
         </div>
       ))}
@@ -30,18 +38,11 @@ export const Slideshow = ({ images, slideProperties }) => {
 }
 
 Slideshow.defaultProps = {
-  images: [
-    require('./assets/IMG_1.jpg'),
-    require('./assets/IMG_2.jpg'),
-    require('./assets/IMG_3.jpg'),
-    require('./assets/IMG_4.jpg'),
-    require('./assets/IMG_5.jpg'),
-  ],
   slideProperties: {
     duration: 5000,
-    autoplay: true,
+    // autoplay: true,
     arrows: true,
-    transitionDuration: 500,
+    transitionDuration: 350,
     infinite: true,
     indicators: false,
   },

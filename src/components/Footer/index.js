@@ -56,7 +56,7 @@ export const Footer = () => {
           <ul className={classes.ul}>
             {footerLinks.map((link, idx) => {
               return (
-                <Link key={idx} className={classes.link}>
+                <Link key={idx} className={classes.link} to={`/${link}`}>
                   {link}
                 </Link>
               )

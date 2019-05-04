@@ -56,7 +56,6 @@ export const Subscribe = () => {
             type="email"
             onChange={e => setEmail(e.target.value)}
             InputProps={{
-              disableOutline: true,
               disableUnderline: true,
               classes: { root: classes.inputRoot },
             }}
