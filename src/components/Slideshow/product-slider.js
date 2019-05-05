@@ -25,23 +25,12 @@ const useStyles = makeStyles({
 
 export const ProductSlider = ({ images, slideProperties }) => {
   const classes = useStyles()
-  console.log('images', images)
   return (
     <Slide {...slideProperties}>
       {images.map((img, idx) => (
-        // <div key={idx}>
         <div className={classes.imageContainer} key={idx}>
-          <div
-            backgroundImage={`url(${require('./assets/IMG_33.jpg')}`}
-            className={classes.image}
-          />
-          {/* <Img
-              fluid={img.localFile.childImageSharp.fluid}
-              key={img.id}
-              alt={img.product.title}
-            /> */}
+          <Img fluid={img.localFile.childImageSharp.fluid} key={img.id} />
         </div>
-        // </div>
       ))}
     </Slide>
   )
@@ -50,6 +39,7 @@ export const ProductSlider = ({ images, slideProperties }) => {
 ProductSlider.defaultProps = {
   slideProperties: {
     duration: 5000,
+    autoplay: false,
     arrows: true,
     transitionDuration: 350,
     infinite: true,
