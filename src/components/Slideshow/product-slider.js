@@ -7,40 +7,49 @@ import { Img } from '../../utils/styles'
 const useStyles = makeStyles({
   imageContainer: {
     width: '100%',
-    height: '100vh',
+    height: 600,
   },
   image: {
+    display: 'block',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    overflow: 'hidden',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 1,
   },
 })
 
-export const Slideshow = ({ images, slideProperties }) => {
-  alert('hello')
-  console.log('images', images)
+export const ProductSlider = ({ images, slideProperties }) => {
   const classes = useStyles()
+  console.log('images', images)
   return (
     <Slide {...slideProperties}>
       {images.map((img, idx) => (
-        <div key={idx}>
-          <div className={classes.imageContainer}>
-            <Img
+        // <div key={idx}>
+        <div className={classes.imageContainer} key={idx}>
+          <div
+            backgroundImage={`url(${require('./assets/IMG_33.jpg')}`}
+            className={classes.image}
+          />
+          {/* <Img
               fluid={img.localFile.childImageSharp.fluid}
               key={img.id}
               alt={img.product.title}
-            />
-          </div>
+            /> */}
         </div>
+        // </div>
       ))}
     </Slide>
   )
 }
 
-Slideshow.defaultProps = {
+ProductSlider.defaultProps = {
   slideProperties: {
     duration: 5000,
-    // autoplay: true,
     arrows: true,
     transitionDuration: 350,
     infinite: true,

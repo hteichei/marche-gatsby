@@ -3,19 +3,32 @@ import { graphql } from 'gatsby'
 import { Flex, Box } from '@rebass/grid/emotion'
 
 import ProductForm from '../../components/ProductForm'
-import { Slideshow } from '../../components'
+import { ProductSlider } from '../../components/Slideshow/product-slider'
+// import { useProductData } from './graphql'
 
 const ProductPage = ({ data }) => {
   const product = data.shopifyProduct
-  console.log('images', product.images)
   return (
     <Flex flexWrap="wrap">
       <Box pr={[null, 3]} width={[1, 1 / 2]}>
-        <Slideshow images={product.images} />
+        <ProductSlider images={product.images} />
       </Box>
-      <Box width={[1, 1 / 2]}>
-        <h1>{product.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+      <Box
+        width={[1, 1 / 2]}
+        style={{
+          padding: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          fontFamily: 'Oswald',
+          fontWeight: 300,
+        }}
+      >
+        <h1 style={{ textAlign: 'center' }}>{product.title}</h1>
+        <div
+          style={{ textAlign: 'center', maxWidth: 300, width: '100%' }}
+          dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+        />
         <ProductForm product={product} />
       </Box>
     </Flex>

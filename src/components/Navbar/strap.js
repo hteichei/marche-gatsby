@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   Collapse,
   Navbar,
@@ -12,7 +12,11 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap'
+import { FaShoppingCart } from 'react-icons/fa'
 import { makeStyles } from '@material-ui/styles'
+import styled from '@emotion/styled'
+
+import StoreContext from '../../context/StoreContext'
 
 const useStyles = makeStyles({
   container: {
@@ -39,9 +43,14 @@ const useStyles = makeStyles({
 })
 
 export const Example = () => {
+  // Hooks
   const [isOpen, setOpen] = useState(false)
-  const toggle = () => setOpen(!isOpen)
+  const context = useContext(StoreContext)
   const classes = useStyles()
+
+  // Handlers
+  const toggle = () => setOpen(!isOpen)
+  const { lineItems } = context.checkout
   return (
     <div>
       <Navbar color="light" light expand="md" className={classes.container}>
@@ -74,9 +83,28 @@ export const Example = () => {
             <NavItem>
               <NavLink href="/contact">Contact</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href="/cart">
+                {lineItems.length !== 0 && (
+                  <CartCounter>{lineItems.length}</CartCounter>
+                )}
+                <FaShoppingCart size={25} />
+              </NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
     </div>
   )
 }
+
+const CartCounter = styled.span({
+  backgroundColor: `white`,
+  color: `#663399`,
+  borderRadius: `50%`,
+  padding: `0 5px`,
+  fontSize: `1rem`,
+  float: `right`,
+  margin: `-10px -15px`,
+  zIndex: 999,
+})

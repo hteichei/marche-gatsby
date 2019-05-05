@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import StoreContext from '../../context/StoreContext'
 import VariantSelector from './VariantSelector'
+import { QuantityForm } from './quantity-form'
 
 const ProductForm = props => {
   const [quantity, setQuantity] = useState(1)
@@ -56,6 +57,16 @@ const ProductForm = props => {
     context.addVariantToCart(productVariant.shopifyId, quantity)
   }
 
+  const handleUpOne = e => {
+    e.preventDefault()
+    setQuantity(quantity + 1)
+  }
+
+  const handleDownOne = e => {
+    e.preventDefault()
+    setQuantity(quantity - 1)
+  }
+
   const variantSelectors = hasVariants
     ? props.product.options.map(option => {
         return (
@@ -69,25 +80,23 @@ const ProductForm = props => {
     : null
 
   return (
-    <>
+    <div
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
       <h3>${productVariant.price}</h3>
       {variantSelectors}
-      <label htmlFor="quantity">Quantity </label>
-      <input
-        type="number"
-        id="quantity"
-        name="quantity"
-        min="1"
-        step="1"
-        onChange={handleQuantityChange}
-        value={quantity}
+      <QuantityForm
+        quantity={quantity}
+        handleQuantity={handleQuantityChange}
+        handleUpOne={handleUpOne}
+        handleDownOne={handleDownOne}
       />
       <br />
       <button type="submit" disabled={!available} onClick={handleAddToCart}>
         Add to Cart
       </button>
       {!available && <p>This Product is out of Stock!</p>}
-    </>
+    </div>
   )
 }
 
