@@ -4,7 +4,6 @@ import { Flex, Box } from '@rebass/grid/emotion'
 
 import ProductForm from '../../components/ProductForm'
 import { ProductSlider } from '../../components/Slideshow/product-slider'
-// import { useProductData } from './graphql'
 
 const ProductPage = ({ data }) => {
   const product = data.shopifyProduct
@@ -24,7 +23,7 @@ const ProductPage = ({ data }) => {
           fontWeight: 300,
         }}
       >
-        <h1 style={{ textAlign: 'center' }}>{product.title}</h1>
+        <h2 style={{ textAlign: 'center' }}>{product.title}</h2>
         <div
           style={{ textAlign: 'center', maxWidth: 300, width: '100%' }}
           dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}

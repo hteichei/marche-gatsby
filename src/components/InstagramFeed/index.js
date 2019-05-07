@@ -1,5 +1,4 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/styles'
 
 import { useStyles } from './styles'
 import { useInstaData } from './graphql'

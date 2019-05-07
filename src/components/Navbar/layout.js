@@ -1,118 +1,127 @@
-import React, { useState } from 'react'
-import { Link } from 'gatsby'
-import { makeStyles } from '@material-ui/styles'
-import { List, ListItem, ListItemText, withStyles } from '@material-ui/core'
+import React, { useState, useContext, Fragment } from 'react'
 import {
-  FaInstagram,
-  FaFacebookSquare,
-  FaPinterestSquare,
-} from 'react-icons/fa'
+  Navbar,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap'
+import { FaShoppingCart } from 'react-icons/fa'
+import { MdMenu } from 'react-icons/md'
+import { makeStyles } from '@material-ui/styles'
+import { IconButton } from '@material-ui/core'
+import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery'
+import styled from '@emotion/styled'
 
-import { navItems, shopItems, subNav } from './helpers'
+import Cart from '../Cart'
+import Drawer from './drawer'
+import StoreContext from '../../context/StoreContext'
 
 const useStyles = makeStyles({
   container: {
-    marginLeft: 40,
+    width: '100%',
+    height: 65,
     position: 'absolute',
+    top: 0,
     left: 0,
-    top: 50,
-  },
-  title: {
+    padding: '0 50px',
+    zIndex: 999,
     fontFamily: 'Oswald',
-    fontSize: 36,
-    fontWeight: 500,
-    marginBottom: 30,
-  },
-  iconContainer: {
+    color: 'black',
+    letterSpacing: 1.3,
     display: 'flex',
-    width: 60,
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  logo: {
+    width: 150,
+    height: 60,
+    '@media (max-width: 400px)': {
+      width: 120,
+    },
   },
 })
 
-export const Layout = () => {
-  const [open, setOpen] = useState(false)
+export const MarcheNavbar = () => {
+  // Hooks
+  const [isOpen, setOpen] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false)
+  const context = useContext(StoreContext)
   const classes = useStyles()
+  const isMobile = useMediaQuery('(max-width: 780px)')
 
+  // Handlers
+  const toggleDrawer = () => setOpen(!isOpen)
+  const handleOpenDialog = () => setOpenDialog(true)
+  const handleCloseDialog = () => setOpenDialog(false)
+  const handleCloseDrawer = () => setOpen(false)
+
+  const { lineItems } = context.checkout
   return (
-    <div className={classes.container}>
-      <p className={classes.title}>LE MARCHÉ</p>
-      <List>
-        {navItems.map((item, idx) =>
-          item.label === 'Shop' ? (
-            <div>
-              <StyledListItem
-                key={idx}
-                onClick={() => setOpen(!open)}
-                component={Link}
-                to={`${item.link}`}
-              >
-                <StyledListItemText primary={item.label} />
-              </StyledListItem>
-              {open && (
-                <List style={{ marginLeft: 20 }}>
-                  {shopItems.map((item, idx) => (
-                    <StyledListItem
-                      key={idx}
-                      component={Link}
-                      to={`${item.link}`}
-                    >
-                      <StyledListItemText primary={item.label} />
-                    </StyledListItem>
-                  ))}
-                </List>
+    <Fragment>
+      <Navbar color="light" light expand="md" className={classes.container}>
+        <NavbarBrand href="/">
+          <img
+            src={require(`../../images/marche-logo.svg`)}
+            alt="logo"
+            className={classes.logo}
+          />
+        </NavbarBrand>
+        {isMobile ? (
+          <IconButton
+            onClick={() => toggleDrawer()}
+            style={{ outline: 'none' }}
+          >
+            <MdMenu size={25} />
+          </IconButton>
+        ) : (
+          <Nav className="ml-auto" navbar style={{ alignItems: 'center' }}>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                Shop
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem>
+                  <NavLink href="/products">All</NavLink>
+                </DropdownItem>
+                <DropdownItem>Dresses</DropdownItem>
+                <DropdownItem>Shirts</DropdownItem>
+                <DropdownItem>Jumpers</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            <NavItem>
+              <NavLink href="/about">About</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/contact">Contact</NavLink>
+            </NavItem>
+            <NavItem>
+              {lineItems.length !== 0 && (
+                <CartCounter>{lineItems.length}</CartCounter>
               )}
-            </div>
-          ) : (
-            <StyledListItem key={idx} component={Link} to={`${item.link}`}>
-              <StyledListItemText primary={item.label} />
-            </StyledListItem>
-          )
+              <IconButton onClick={() => handleOpenDialog()}>
+                <FaShoppingCart size={25} />
+              </IconButton>
+            </NavItem>
+          </Nav>
         )}
-      </List>
-      <List style={{ marginTop: 15 }}>
-        {subNav.map((item, idx) => (
-          <StyledListItem key={idx} component={Link} to={`${item.link}`}>
-            <StyledListItemTextAlt primary={item.label} />
-          </StyledListItem>
-        ))}
-      </List>
-      <div className={classes.iconContainer}>
-        <FaInstagram />
-        <FaPinterestSquare />
-        <FaFacebookSquare />
-      </div>
-    </div>
+      </Navbar>
+      <Cart openDialog={openDialog} handleClose={handleCloseDialog} />
+      <Drawer open={isOpen} handleClose={handleCloseDrawer} />
+    </Fragment>
   )
 }
 
-const StyledListItemText = withStyles({
-  primary: {
-    fontFamily: 'Oswald',
-    textTransform: 'uppercase',
-    fontSize: 20,
-    '&:hover': {
-      color: 'rgba(0,0,0,.4)',
-    },
-  },
-})(ListItemText)
-
-const StyledListItemTextAlt = withStyles({
-  primary: {
-    fontFamily: 'Oswald',
-    fontSize: 15,
-    '&:hover': {
-      color: 'rgba(0,0,0,.4)',
-    },
-  },
-})(ListItemText)
-
-const StyledListItem = withStyles({
-  root: {
-    padding: '2px 2px',
-  },
-  selected: {
-    color: 'rgba(0,0,0,.4)',
-  },
-})(ListItem)
+const CartCounter = styled.span({
+  backgroundColor: `white`,
+  color: `#663399`,
+  borderRadius: `50%`,
+  padding: `0 5px`,
+  fontSize: `1rem`,
+  float: `right`,
+  margin: `-10px -15px`,
+  zIndex: 999,
+})

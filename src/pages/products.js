@@ -3,7 +3,7 @@ import React from 'react'
 import ProductGrid from '../components/ProductGrid'
 import SEO from '../components/seo'
 
-const SecondPage = () => {
+const SecondPage = props => {
   return (
     <>
       <SEO title="Page two" />

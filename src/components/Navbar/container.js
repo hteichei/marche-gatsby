@@ -1,4 +1,4 @@
 import React from 'react'
-import { Example } from './strap'
+import { MarcheNavbar } from './layout'
 
-export const NavbarContainer = () => <Example />
+export const NavbarContainer = () => <MarcheNavbar />

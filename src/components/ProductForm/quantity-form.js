@@ -35,22 +35,27 @@ export const QuantityForm = ({
   handleUpOne,
   handleDownOne,
   quantity,
+  available,
 }) => {
   const classes = useStyles()
   return (
     <form className={classes.form}>
-      <label htmlFor="quantity">Quantity</label>
+      <label style={{ display: 'none' }} htmlFor="quantity">
+        Quantity
+      </label>
       <TextField
         className={classes.textField}
         id="quantity"
         value={quantity}
-        onChange={e => handleQuantity(e.target.value)}
+        onChange={e => handleQuantity(e)}
+        disabled={!available}
+        helperText="Sorry, this product is out of stock"
         InputProps={{
           startAdornment: (
             <InputAdornment position="end">
               <button
                 className={classes.button}
-                disabled={quantity === 1}
+                disabled={quantity === 1 || !available}
                 onClick={e => handleDownOne(e)}
               >
                 -
@@ -59,7 +64,11 @@ export const QuantityForm = ({
           ),
           endAdornment: (
             <InputAdornment position="start">
-              <button className={classes.button} onClick={e => handleUpOne(e)}>
+              <button
+                disabled={!available}
+                className={classes.button}
+                onClick={e => handleUpOne(e)}
+              >
                 +
               </button>
             </InputAdornment>

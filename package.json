@@ -30,11 +30,10 @@
     "react-helmet": "^5.2.0",
     "react-icons": "^3.3.0",
     "react-router-dom": "^5.0.0",
-    "react-slick": "^0.24.0",
     "react-slideshow-image": "^1.1.5",
+    "react-swipeable-views": "^0.13.1",
     "reactstrap": "^8.0.0",
     "shopify-buy": "^2.0.1",
-    "slick-carousel": "^1.8.1",
     "styled-components": "^4.2.0"
   },
   "keywords": [

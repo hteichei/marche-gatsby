@@ -25,7 +25,6 @@ const useStyles = makeStyles({
   buyNow: {
     margin: 10,
     border: '1px solid black',
-    // borderRadius: 2,
     backgroundColor: '#f5f5f5',
     width: 250,
     height: 45,
@@ -94,12 +93,12 @@ const ProductForm = props => {
 
   const handleUpOne = e => {
     e.preventDefault()
-    setQuantity(quantity + 1)
+    setQuantity(Number(quantity) + 1)
   }
 
   const handleDownOne = e => {
     e.preventDefault()
-    setQuantity(quantity - 1)
+    setQuantity(Number(quantity) - 1)
   }
 
   const variantSelectors = hasVariants
@@ -120,11 +119,13 @@ const ProductForm = props => {
     >
       <h3>${productVariant.price}</h3>
       {variantSelectors}
+      <label>Quantity</label>
       <QuantityForm
         quantity={quantity}
         handleQuantity={handleQuantityChange}
         handleUpOne={handleUpOne}
         handleDownOne={handleDownOne}
+        available={available}
       />
       <br />
       <button
