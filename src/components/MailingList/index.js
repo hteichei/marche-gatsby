@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
-import { TextField, Button, withStyles } from '@material-ui/core'
+import {
+  TextField,
+  Button,
+  withStyles,
+  CircularProgress,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
+import addToMailchimp from 'gatsby-plugin-mailchimp'
 
 const useStyles = makeStyles({
   container: {
@@ -22,10 +28,20 @@ const useStyles = makeStyles({
 export const Subscribe = () => {
   const classes = useStyles()
   const [email, setEmail] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [msg, setMsg] = useState('')
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    alert('hooray')
+    await setLoading(true)
+    addToMailchimp(email).then(res => {
+      if (res.result === 'success') {
+        setMsg(res.msg)
+      } else {
+        setMsg(`Sorry, there's been a problem.  Please try again.`)
+      }
+    })
+    setLoading(false)
     setEmail('')
   }
 
@@ -49,6 +65,7 @@ export const Subscribe = () => {
           >
             Join our Mailing List
           </label>
+          <p>{msg ? msg : ''}</p>
           <TextField
             id="subscribeForm"
             placeholder="frank@email.com"
@@ -62,7 +79,7 @@ export const Subscribe = () => {
           />
         </div>
         <StyledButton disabled={!email.length} type="submit" id="subscribe">
-          Join
+          {loading ? <CircularProgress size={15} /> : 'Join'}
         </StyledButton>
       </form>
     </div>

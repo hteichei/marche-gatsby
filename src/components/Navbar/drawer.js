@@ -13,11 +13,17 @@ const useStyles = makeStyles({
   fullList: {
     width: 'auto',
   },
+  backdrop: {
+    top: 60,
+  },
+  paperTop: {
+    top: 60,
+  },
 })
 
 const Drawer = props => {
   const classes = useStyles()
-  const { open, handleClose } = props
+  const { open, toggleDrawer } = props
 
   const sideList = (
     <div className={classes.list}>
@@ -39,32 +45,15 @@ const Drawer = props => {
     </div>
   )
 
-  const fullList = (
-    <div className={classes.fullList}>
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  )
-
   return (
     <div>
       <SwipeableDrawer
+        // Overrides currently not working
+        classes={{ root: classes.backdrop, paperAnchorTop: classes.paperTop }}
+        anchor="top"
         open={open}
-        onClose={() => handleClose()}
-        // onOpen={}
+        onClose={toggleDrawer('top', false)}
+        onOpen={toggleDrawer('top', true)}
       >
         <div tabIndex={0} role="button">
           {sideList}

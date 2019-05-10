@@ -35,6 +35,9 @@ const useStyles = makeStyles({
     letterSpacing: 1.3,
     display: 'flex',
     justifyContent: 'space-between',
+    '@media (max-width: 780px)': {
+      padding: '0 20px',
+    },
   },
   logo: {
     width: 150,
@@ -47,17 +50,23 @@ const useStyles = makeStyles({
 
 export const MarcheNavbar = () => {
   // Hooks
-  const [isOpen, setOpen] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
+  const [drawerState, setDrawerState] = useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  })
   const context = useContext(StoreContext)
   const classes = useStyles()
   const isMobile = useMediaQuery('(max-width: 780px)')
 
   // Handlers
-  const toggleDrawer = () => setOpen(!isOpen)
-  const handleOpenDialog = () => setOpenDialog(true)
+  const toggleDrawerState = (side, open) => () => {
+    setDrawerState({ ...drawerState, [side]: open })
+  }
   const handleCloseDialog = () => setOpenDialog(false)
-  const handleCloseDrawer = () => setOpen(false)
+  const handleOpenDialog = () => setOpenDialog(true)
 
   const { lineItems } = context.checkout
   return (
@@ -72,7 +81,7 @@ export const MarcheNavbar = () => {
         </NavbarBrand>
         {isMobile ? (
           <IconButton
-            onClick={() => toggleDrawer()}
+            onClick={toggleDrawerState('top', !drawerState.top)}
             style={{ outline: 'none' }}
           >
             <MdMenu size={25} />
@@ -102,7 +111,10 @@ export const MarcheNavbar = () => {
               {lineItems.length !== 0 && (
                 <CartCounter>{lineItems.length}</CartCounter>
               )}
-              <IconButton onClick={() => handleOpenDialog()}>
+              <IconButton
+                style={{ outline: 'none' }}
+                onClick={() => handleOpenDialog()}
+              >
                 <FaShoppingCart size={25} />
               </IconButton>
             </NavItem>
@@ -110,18 +122,18 @@ export const MarcheNavbar = () => {
         )}
       </Navbar>
       <Cart openDialog={openDialog} handleClose={handleCloseDialog} />
-      <Drawer open={isOpen} handleClose={handleCloseDrawer} />
+      <Drawer open={drawerState.top} toggleDrawer={toggleDrawerState} />
     </Fragment>
   )
 }
 
 const CartCounter = styled.span({
   backgroundColor: `white`,
-  color: `#663399`,
+  color: `black`,
   borderRadius: `50%`,
-  padding: `0 5px`,
+  padding: `0 7.5px`,
   fontSize: `1rem`,
   float: `right`,
-  margin: `-10px -15px`,
+  margin: `-5px -10px`,
   zIndex: 999,
 })

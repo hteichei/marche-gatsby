@@ -38,6 +38,7 @@ export const QuantityForm = ({
   available,
 }) => {
   const classes = useStyles()
+  console.log('available', available)
   return (
     <form className={classes.form}>
       <label style={{ display: 'none' }} htmlFor="quantity">
@@ -49,7 +50,7 @@ export const QuantityForm = ({
         value={quantity}
         onChange={e => handleQuantity(e)}
         disabled={!available}
-        helperText="Sorry, this product is out of stock"
+        helperText={!available && 'Sorry, this product is out of stock'}
         InputProps={{
           startAdornment: (
             <InputAdornment position="end">

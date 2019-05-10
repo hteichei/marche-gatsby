@@ -32,6 +32,12 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint: process.env.MAILCHIMP_ENDPOINT, // add your MC list endpoint here; see instructions below
+      },
+    },
+    {
       resolve: `gatsby-source-shopify2`,
       options: {
         // The domain name of your Shopify shop. This is required.
