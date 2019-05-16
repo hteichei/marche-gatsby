@@ -7,7 +7,6 @@ import { Img } from '../../utils/styles'
 const useStyles = makeStyles({
   imageContainer: {
     width: '100%',
-    height: 600,
   },
   image: {
     display: 'block',

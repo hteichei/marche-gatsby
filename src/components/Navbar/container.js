@@ -1,4 +1,4 @@
 import React from 'react'
-import { MarcheNavbar } from './layout_alt'
+import { MarcheNavbar } from './layout'
 
 export const NavbarContainer = () => <MarcheNavbar />

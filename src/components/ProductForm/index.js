@@ -11,7 +11,6 @@ const useStyles = makeStyles({
   addToCart: {
     margin: 10,
     border: '1px solid black',
-    // borderRadius: 2,
     backgroundColor: '#fff',
     width: 250,
     height: 45,

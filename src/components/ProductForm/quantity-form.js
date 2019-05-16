@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
   button: {
     border: 'none',
-    backgroundColor: 'none',
+    backgroundColor: 'transparent',
     outline: 'none',
     '&:focus': {
       outline: 'none',
@@ -38,7 +38,6 @@ export const QuantityForm = ({
   available,
 }) => {
   const classes = useStyles()
-  console.log('available', available)
   return (
     <form className={classes.form}>
       <label style={{ display: 'none' }} htmlFor="quantity">

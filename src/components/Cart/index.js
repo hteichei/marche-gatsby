@@ -1,61 +1,11 @@
 import React, { useContext } from 'react'
-import {
-  Dialog,
-  DialogContent,
-  Button,
-  withStyles,
-  IconButton,
-  MuiDialogTitle,
-  Typography,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { Dialog, DialogContent } from '@material-ui/core'
 import { MdClose } from 'react-icons/md'
 
+import { useStyles } from './cart.styles'
 import StoreContext from '../../context/StoreContext'
 import LineItem from './LineItem'
-// import { StyledDialogTitle } from './dialog/dialogTitle'
-
-const useStyles = makeStyles({
-  priceInfo: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    fontFamily: 'Oswald',
-    fontWeight: 300,
-  },
-  subTotal: {
-    display: 'flex',
-    alignItems: 'center',
-    margin: '30px 10px 10px',
-  },
-  titleRoot: {
-    display: 'flex',
-    borderBottom: `1px solid black`,
-    margin: 0,
-    padding: 5,
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center !important',
-  },
-  closeButton: {
-    position: 'abolute !important',
-    top: 5,
-    right: 10,
-  },
-  paperRoot: {},
-  paperScroll: {},
-  '@media (max-width: 600px)': {
-    paperRoot: {
-      margin: '0px !important',
-      height: '100vh',
-      width: '100vw',
-    },
-    paperScroll: {
-      maxHeight: '100% !important',
-    },
-  },
-})
+import { CheckoutButton, CloseButton } from './buttons'
 
 const Cart = ({ openDialog, handleClose }) => {
   const context = useContext(StoreContext)
@@ -70,11 +20,10 @@ const Cart = ({ openDialog, handleClose }) => {
     return <LineItem key={line_item.id.toString()} line_item={line_item} />
   })
 
-  const emptyCart = !line_items
-
   return (
     <Dialog
       classes={{
+        root: classes.dialogRoot,
         paperScrollPaper: classes.paperScroll,
         paper: classes.paperRoot,
       }}
@@ -82,16 +31,16 @@ const Cart = ({ openDialog, handleClose }) => {
       onClose={() => handleClose()}
     >
       <div className={classes.titleRoot} disableTypography>
-        <p style={{ margin: 0 }}>Your Cart</p>
-        <IconButton
+        <p className={classes.title}>Your Cart</p>
+        <CloseButton
           className={classes.closeButton}
           aria-label="Close"
           onClick={handleClose}
         >
           <MdClose />
-        </IconButton>
+        </CloseButton>
       </div>
-      <DialogContent>
+      <DialogContent classes={{ root: classes.contentRoot }}>
         {line_items}
         <div className={classes.priceInfo}>
           <div className={classes.subTotal}>
@@ -113,18 +62,3 @@ const Cart = ({ openDialog, handleClose }) => {
 }
 
 export default Cart
-
-export const CheckoutButton = withStyles({
-  root: {
-    margin: 10,
-    border: '1px solid black',
-    borderRadius: 2,
-    backgroundColor: '#f5f5f5',
-    width: '100%',
-    height: 45,
-  },
-  label: {
-    fontFamily: 'Oswald',
-    fontWeight: 300,
-  },
-})(Button)

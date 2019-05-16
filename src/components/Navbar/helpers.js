@@ -1,52 +1,41 @@
 export const navItems = [
   {
     label: 'Home',
-    link: '/'
+    link: '/',
   },
   {
     label: 'Shop',
-    link: '/shop/all'
+    link: '/products',
   },
   {
     label: 'About',
-    link: '/about'
-  }
-];
-
-export const shopItems = [
-  {
-    label: 'Tops',
-    link: '/shop/tops'
+    link: '/about',
   },
   {
-    label: 'Dresses',
-    link: '/shop/dresses'
+    label: 'Contact',
+    link: '/contact',
   },
-  {
-    label: 'Accessories',
-    link: 'shop/accessories'
-  }
-];
+]
 
 export const subNav = [
   {
     label: 'Search',
-    link: '/search'
+    link: '/search',
   },
   {
     label: 'Email Sign-up',
-    link: '/sign-up'
+    link: '/sign-up',
   },
   {
     label: 'Contact',
-    link: '/contact'
+    link: '/contact',
   },
   {
     label: 'Store Policies',
-    link: '/store-policies'
+    link: '/store-policies',
   },
   {
     label: 'Privacy Policy',
-    link: '/privacy'
-  }
-];
+    link: '/privacy',
+  },
+]

@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     padding: 7.5,
     borderRadius: 2,
     border: '1px solid #636363',
+    backgroundColor: '#fff',
   },
   form: {
     width: 300,
@@ -93,5 +94,6 @@ export const StyledButton = withStyles({
     color: 'black',
     fontFamily: 'Oswald',
     padding: 4,
+    backgroundColor: '#fff',
   },
 })(Button)

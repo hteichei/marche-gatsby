@@ -23,7 +23,7 @@ const ProductPage = ({ data }) => {
           fontWeight: 300,
         }}
       >
-        <h2 style={{ textAlign: 'center' }}>{product.title}</h2>
+        <h5 style={{ textAlign: 'center' }}>{product.title}</h5>
         <div
           style={{ textAlign: 'center', maxWidth: 300, width: '100%' }}
           dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
@@ -65,7 +65,7 @@ export const query = graphql`
         localFile {
           childImageSharp {
             fluid(maxWidth: 910) {
-              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              ...GatsbyImageSharpFluid
             }
           }
         }

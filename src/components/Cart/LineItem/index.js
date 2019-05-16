@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/styles'
 
 import StoreContext from '../../../context/StoreContext'
 import { QuantityForm } from '../../ProductForm/quantity-form'
-import { ClassNames } from '@emotion/core'
 
 const useStyles = makeStyles({
   container: {
@@ -23,7 +22,7 @@ const useStyles = makeStyles({
   button: {
     padding: 0,
     border: 'none',
-    backgroundColor: 'none',
+    backgroundColor: 'transparent',
     outline: 'none',
     color: '#C0C0C0',
     fontFamily: 'Oswald',

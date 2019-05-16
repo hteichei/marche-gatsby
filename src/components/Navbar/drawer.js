@@ -1,23 +1,45 @@
 import React from 'react'
+import { navigate } from 'gatsby'
 import { makeStyles } from '@material-ui/styles'
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import List from '@material-ui/core/List'
-import Divider from '@material-ui/core/Divider'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
+import {
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from '@material-ui/core'
+
+import { navItems } from './helpers'
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: '100vw',
+  },
+  listRoot: {
+    padding: '0 !important',
   },
   fullList: {
     width: 'auto',
   },
   backdrop: {
-    top: 60,
+    top: '60px !important',
   },
   paperTop: {
-    top: 60,
+    top: '60px !important',
+  },
+  link: {
+    color: 'black',
+    margin: 0,
+    textDecoration: 'none',
+    letterSpacing: 1.5,
+    '&:hover': {
+      color: 'rgba(0,0,0,.5)',
+      textDecoration: 'none',
+    },
+  },
+  elevation16: {
+    // Not working yet
+    boxShadow: 'none !important',
   },
 })
 
@@ -25,21 +47,21 @@ const Drawer = props => {
   const classes = useStyles()
   const { open, toggleDrawer } = props
 
+  const handleNavigate = url => {
+    // Want to close drawer automatically after navigating to new page
+    navigate(url)
+  }
+
   const sideList = (
     <div className={classes.list}>
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
+      <List classes={{ root: classes.listRoot }}>
+        {navItems.map(item => (
+          <div key={item}>
+            <ListItem button onClick={() => handleNavigate(item.link)}>
+              <ListItemText primary={item.label} />
+            </ListItem>
+            <Divider />
+          </div>
         ))}
       </List>
     </div>
@@ -48,8 +70,10 @@ const Drawer = props => {
   return (
     <div>
       <SwipeableDrawer
-        // Overrides currently not working
-        classes={{ root: classes.backdrop, paperAnchorTop: classes.paperTop }}
+        classes={{ paperAnchorTop: classes.paperTop }}
+        ModalProps={{
+          BackdropProps: { classes: { root: classes.backdrop } },
+        }}
         anchor="top"
         open={open}
         onClose={toggleDrawer('top', false)}
