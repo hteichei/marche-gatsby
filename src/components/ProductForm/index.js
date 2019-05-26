@@ -1,42 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { makeStyles } from '@material-ui/styles'
 import PropTypes from 'prop-types'
 
 import StoreContext from '../../context/StoreContext'
 import VariantSelector from './VariantSelector'
+import { connect } from 'react-redux'
 import { QuantityForm } from './quantity-form'
-import { ClassNames } from '@emotion/core'
-
-const useStyles = makeStyles({
-  addToCart: {
-    margin: 10,
-    border: '1px solid black',
-    backgroundColor: '#fff',
-    width: 250,
-    height: 45,
-    '&:hover': {
-      backgroundColor: '#f5f5f5',
-    },
-    '&:focus': {
-      outline: 'none',
-    },
-  },
-  buyNow: {
-    margin: 10,
-    border: '1px solid black',
-    backgroundColor: '#f5f5f5',
-    width: 250,
-    height: 45,
-    '&:hover': {
-      backgroundColor: '#f2f2f2',
-    },
-    '&:focus': {
-      outline: 'none',
-    },
-  },
-})
+import { useStyles } from './styles'
+import { handleAddItem } from '../../state/app'
 
 const ProductForm = props => {
+  const { dispatch, lineItems } = props
   // Hooks
   const [quantity, setQuantity] = useState(1)
   const [variant, setVariant] = useState(props.product.variants[0])
@@ -113,9 +86,7 @@ const ProductForm = props => {
     : null
 
   return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-    >
+    <div className={classes.container}>
       <h3>${productVariant.price}</h3>
       {variantSelectors}
       <label>Quantity</label>
@@ -131,6 +102,7 @@ const ProductForm = props => {
         type="submit"
         disabled={!available}
         onClick={handleAddToCart}
+        // onClick={() => dispatch(handleAddItem({ ...productVariant, quantity }))}
         className={classes.addToCart}
       >
         Add to Cart ${quantity * productVariant.price}
@@ -181,4 +153,9 @@ ProductForm.propTypes = {
   addVariantToCart: PropTypes.func,
 }
 
-export default ProductForm
+export default connect(
+  state => ({
+    lineItems: state.app.lineItems,
+  }),
+  null
+)(ProductForm)

@@ -1,34 +1,7 @@
 import React from 'react'
 import { TextField, InputAdornment } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles({
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  textField: {
-    width: 140,
-  },
-  inputRoot: {
-    padding: 7.5,
-    borderRadius: 2,
-    border: '1px solid #636363',
-    textAlign: 'center',
-  },
-  input: {
-    textAlign: 'center',
-  },
-  button: {
-    border: 'none',
-    backgroundColor: 'transparent',
-    outline: 'none',
-    '&:focus': {
-      outline: 'none',
-    },
-  },
-})
+import { useStyles } from './styles'
 
 export const QuantityForm = ({
   handleQuantity,

@@ -2,16 +2,22 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { Flex, Box } from '@rebass/grid/emotion'
 
+import { Img } from '../../utils/styles'
+import Image from 'gatsby-image'
 import ProductForm from '../../components/ProductForm'
-import { ProductSlider } from '../../components/Slideshow/product-slider'
 
 const ProductPage = ({ data }) => {
   const product = data.shopifyProduct
   return (
     <Flex flexWrap="wrap">
-      <Box pr={[null, 3]} width={[1, 1 / 2]}>
-        <ProductSlider images={product.images} />
-      </Box>
+      <div style={{ width: '50vw', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ maxWidth: 400, width: '100%' }}>
+          <Image
+            fluid={product.images[0].localFile.childImageSharp.fluid}
+            style={{ marginBottom: 0 }}
+          />
+        </div>
+      </div>
       <Box
         width={[1, 1 / 2]}
         style={{
@@ -21,6 +27,7 @@ const ProductPage = ({ data }) => {
           alignItems: 'center',
           fontFamily: 'Oswald',
           fontWeight: 300,
+          justifyContent: 'center',
         }}
       >
         <h5 style={{ textAlign: 'center' }}>{product.title}</h5>

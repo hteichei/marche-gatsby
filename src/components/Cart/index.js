@@ -1,24 +1,49 @@
-import React, { useContext } from 'react'
-import { Dialog, DialogContent } from '@material-ui/core'
+import React, { useContext, useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { Dialog, DialogContent, CircularProgress } from '@material-ui/core'
 import { MdClose } from 'react-icons/md'
 
 import { useStyles } from './cart.styles'
 import StoreContext from '../../context/StoreContext'
 import LineItem from './LineItem'
 import { CheckoutButton, CloseButton } from './buttons'
+import { hydrateCart, handleUpdateQuantity } from '../../state/app'
+import { calculateTotal } from './helpers'
 
-const Cart = ({ openDialog, handleClose }) => {
-  const context = useContext(StoreContext)
+const Cart = ({ openDialog, handleClose, dispatch, lineItems }) => {
+  const [loading, setLoading] = useState(true)
+  const { checkout, updateLineItem, client } = useContext(StoreContext)
   const classes = useStyles()
-  const { checkout } = context
 
-  const handleCheckout = () => {
-    window.open(checkout.webUrl)
+  useEffect(
+    () => {
+      dispatch(hydrateCart(checkout.lineItems))
+      setLoading(false)
+    },
+    [checkout]
+  )
+
+  const handleUpdateCart = () => {
+    console.log('update', lineItems)
+    return lineItems.map(item =>
+      updateLineItem(client, checkout.id, item.id, item.quantity)
+    )
   }
 
-  const line_items = checkout.lineItems.map(line_item => {
-    return <LineItem key={line_item.id.toString()} line_item={line_item} />
-  })
+  const handleCheckout = async () => {
+    setLoading(true)
+    await handleUpdateCart()
+    await window.open(checkout.webUrl)
+    setLoading(false)
+  }
+
+  const _updateQuantity = item => dispatch(handleUpdateQuantity(item))
+
+  if (loading) {
+    return <CircularProgress />
+  }
+
+  console.log('lineItems', lineItems)
 
   return (
     <Dialog
@@ -41,11 +66,19 @@ const Cart = ({ openDialog, handleClose }) => {
         </CloseButton>
       </div>
       <DialogContent classes={{ root: classes.contentRoot }}>
-        {line_items}
+        {lineItems.map(line_item => {
+          return (
+            <LineItem
+              key={line_item.id.toString()}
+              line_item={line_item}
+              updateQuantity={_updateQuantity}
+            />
+          )
+        })}
         <div className={classes.priceInfo}>
           <div className={classes.subTotal}>
             <p style={{ margin: '0 10px' }}>Subtotal{` `}</p>
-            <h3>${checkout.subtotalPrice}</h3>
+            <h3>${calculateTotal(lineItems)}</h3>
           </div>
           <br />
           <p style={{ margin: 0 }}>
@@ -53,7 +86,7 @@ const Cart = ({ openDialog, handleClose }) => {
           </p>
           <br />
           <CheckoutButton className={classes.button} onClick={handleCheckout}>
-            Check out
+            {loading ? <CircularProgress /> : 'Check out'}
           </CheckoutButton>
         </div>
       </DialogContent>
@@ -61,4 +94,9 @@ const Cart = ({ openDialog, handleClose }) => {
   )
 }
 
-export default Cart
+export default connect(
+  state => ({
+    lineItems: state.app.lineItems,
+  }),
+  null
+)(Cart)

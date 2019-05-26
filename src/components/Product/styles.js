@@ -24,6 +24,6 @@ export const useStyles = makeStyles({
     lineHeight: '5px',
   },
   priceHide: {
-    display: 'none',
+    color: '#fff',
   },
 })

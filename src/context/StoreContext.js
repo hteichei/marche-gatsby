@@ -15,8 +15,6 @@ export const defaultStoreContext = {
   addVariantToCart: () => {},
   removeLineItem: () => {},
   updateLineItem: () => {},
-  cartIsOpen: false,
-  openCart: () => {},
 }
 
 const StoreContext = React.createContext(defaultStoreContext)

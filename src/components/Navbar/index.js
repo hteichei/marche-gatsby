@@ -1,3 +1,3 @@
-import { NavbarContainer } from './container';
+import { MarcheNavbar } from './layout'
 
-export { NavbarContainer };
+export { MarcheNavbar }

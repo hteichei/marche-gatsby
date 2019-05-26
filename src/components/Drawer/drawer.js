@@ -1,6 +1,5 @@
 import React from 'react'
 import { navigate } from 'gatsby'
-import { makeStyles } from '@material-ui/styles'
 import {
   SwipeableDrawer,
   List,
@@ -10,38 +9,7 @@ import {
 } from '@material-ui/core'
 
 import { navItems } from './helpers'
-
-const useStyles = makeStyles({
-  list: {
-    width: '100vw',
-  },
-  listRoot: {
-    padding: '0 !important',
-  },
-  fullList: {
-    width: 'auto',
-  },
-  backdrop: {
-    top: '60px !important',
-  },
-  paperTop: {
-    top: '60px !important',
-  },
-  link: {
-    color: 'black',
-    margin: 0,
-    textDecoration: 'none',
-    letterSpacing: 1.5,
-    '&:hover': {
-      color: 'rgba(0,0,0,.5)',
-      textDecoration: 'none',
-    },
-  },
-  elevation16: {
-    // Not working yet
-    boxShadow: 'none !important',
-  },
-})
+import { useStyles } from './styles'
 
 const Drawer = props => {
   const classes = useStyles()

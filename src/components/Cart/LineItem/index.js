@@ -1,41 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { makeStyles } from '@material-ui/styles'
 
 import StoreContext from '../../../context/StoreContext'
 import { QuantityForm } from '../../ProductForm/quantity-form'
-
-const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    borderBottom: '1px solid black',
-    height: 200,
-    width: '100%',
-    justifyContent: 'space-around',
-  },
-  productInfo: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    marginRight: 30,
-  },
-  button: {
-    padding: 0,
-    border: 'none',
-    backgroundColor: 'transparent',
-    outline: 'none',
-    color: '#C0C0C0',
-    fontFamily: 'Oswald',
-    fontWeight: 300,
-    '&:hover': {
-      color: '#DCDCDC',
-      cursor: 'pointer',
-    },
-    '&:focus': {
-      outline: 'none',
-    },
-  },
-})
+import { useStyles } from './styles'
 
 const LineItem = props => {
   // Hooks
@@ -44,37 +11,31 @@ const LineItem = props => {
   const context = useContext(StoreContext)
   const classes = useStyles()
 
-  const { line_item } = props
+  const { line_item, updateQuantity } = props
+
+  useEffect(() => {
+    setPrice(line_item.variant.price)
+    setQuantity(line_item.quantity)
+  }, [])
 
   useEffect(
     () => {
-      setPrice(props.line_item.attrs.variant.price)
-      setQuantity(props.line_item.attrs.quantity.value)
+      updateQuantity({ ...line_item, quantity })
     },
-    [props]
+    [quantity]
   )
 
-  // Handlers
-  const handleUpdateCart = () => {
-    context.updateLineItem(
-      context.client,
-      context.checkout.id,
-      line_item.id,
-      quantity
-    )
-  }
-
   const handleQuantity = e => {
+    e.preventDefault()
     setQuantity(e.target.value)
   }
-  const handleDownOne = e => {
+  const handleDownOne = async e => {
     e.preventDefault()
-    setQuantity(Number(quantity) - 1)
+    await setQuantity(Number(quantity) - 1)
   }
   const handleUpOne = async e => {
     e.preventDefault()
     await setQuantity(Number(quantity) + 1)
-    handleUpdateCart()
   }
 
   const variantImage = line_item.variant.image ? (
@@ -88,6 +49,9 @@ const LineItem = props => {
   const handleRemove = () => {
     context.removeLineItem(context.client, context.checkout.id, line_item.id)
   }
+
+  console.log('line_ITEM', line_item)
+  console.log('id', line_item.id)
 
   return (
     <div className={classes.container}>
@@ -103,7 +67,7 @@ const LineItem = props => {
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <p style={{ margin: '0 15px' }}>${price}</p>
+        <p style={{ margin: '0 15px' }}>${Number(price)}</p>
         <QuantityForm
           quantity={quantity}
           handleQuantity={handleQuantity}

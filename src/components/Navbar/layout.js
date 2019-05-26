@@ -1,60 +1,14 @@
 import React, { useState, useContext, Fragment } from 'react'
 import { Link } from 'gatsby'
-import { FaShoppingCart } from 'react-icons/fa'
 import { MdMenu } from 'react-icons/md'
-import { makeStyles } from '@material-ui/styles'
 import { IconButton } from '@material-ui/core'
 import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery'
-import styled from '@emotion/styled'
 
 import Cart from '../Cart'
-import Drawer from './drawer'
+import { CartMenuItem } from './cart-menu-item'
+import Drawer from '../Drawer/drawer'
 import StoreContext from '../../context/StoreContext'
-
-const useStyles = makeStyles({
-  container: {
-    width: '100%',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    padding: '0 50px',
-    zIndex: 1350,
-    fontFamily: 'Oswald',
-    color: 'black',
-    letterSpacing: 1.3,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    '@media (max-width: 780px)': {
-      padding: '0 20px',
-    },
-  },
-  logo: {
-    width: 150,
-    height: 60,
-    '@media (max-width: 400px)': {
-      width: 120,
-    },
-  },
-  navList: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    listStyleType: 'none',
-    justifyContent: 'space-around',
-    margin: '0 0 !important',
-  },
-  link: {
-    color: 'black',
-    margin: 0,
-    textDecoration: 'none',
-    letterSpacing: 1.5,
-    '&:hover': {
-      color: 'rgba(0,0,0,.5)',
-      textDecoration: 'none',
-    },
-  },
-})
+import { useStyles } from './layout-styles'
 
 export const MarcheNavbar = () => {
   // Hooks
@@ -144,23 +98,3 @@ export const MarcheNavbar = () => {
       </Fragment>
     )
 }
-
-const CartCounter = styled.span({
-  backgroundColor: `white`,
-  color: `black`,
-  borderRadius: `50%`,
-  padding: `0 7.5px`,
-  fontSize: `1rem`,
-  float: `right`,
-  margin: `0px -10px`,
-  zIndex: 999,
-})
-
-const CartMenuItem = ({ lineItems, handleOpenDialog }) => (
-  <div>
-    {lineItems.length !== 0 && <CartCounter>{lineItems.length}</CartCounter>}
-    <IconButton style={{ outline: 'none' }} onClick={() => handleOpenDialog()}>
-      <FaShoppingCart size={25} />
-    </IconButton>
-  </div>
-)
