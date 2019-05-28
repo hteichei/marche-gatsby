@@ -2,6 +2,8 @@ import React from 'react'
 import { Slide } from 'react-slideshow-image'
 import { makeStyles } from '@material-ui/styles'
 
+import { img_11, img_33, img_55, img_77, img_88 } from './assets'
+
 const useStyles = makeStyles({
   imageContainer: {
     width: '100%',
@@ -40,13 +42,7 @@ export const Slideshow = ({ images, slideProperties }) => {
 }
 
 Slideshow.defaultProps = {
-  images: [
-    require('./assets/img_33.jpg'),
-    require('./assets/img_11.jpg'),
-    require('./assets/img_55.jpg'),
-    require('./assets/img_88.jpg'),
-    require('./assets/img_77.jpg'),
-  ],
+  images: [img_33, img_11, img_55, img_88, img_77],
   slideProperties: {
     duration: 4000,
     autoplay: false,
