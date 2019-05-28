@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import StoreContext, { defaultStoreContext } from '../context/StoreContext'
-import { Footer, NavbarContainer } from '../components'
+import { Footer, MarcheNavbar } from '../components'
 import { GlobalStyle } from '../utils/styles'
 
 class Layout extends React.Component {
@@ -135,7 +135,7 @@ class Layout extends React.Component {
           `}
           render={data => (
             <>
-              <NavbarContainer />
+              <MarcheNavbar />
               <div
                 style={{
                   paddingTop: 60,

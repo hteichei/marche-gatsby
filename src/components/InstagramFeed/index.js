@@ -1,5 +1,4 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/styles'
 
 import { useStyles } from './styles'
 import { useInstaData } from './graphql'
@@ -11,14 +10,34 @@ const InstaFeed = () => {
   const classes = useStyles()
   return (
     <div className={classes.container}>
-      <p style={{ marginBottom: 0 }}>Instagram</p>
       <div
         style={{
-          width: 25,
-          borderBottom: '1px solid black',
-          margin: '5px 0 20px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          paddingBottom: 20,
         }}
-      />
+      >
+        <p
+          style={{
+            fontFamily: 'Oswald',
+            fontWeight: 300,
+            marginBottom: 0,
+            letterSpacing: 1.35,
+            fontSize: 18,
+            textAlign: 'center',
+          }}
+        >
+          Instagram
+        </p>
+        <div
+          style={{
+            width: 25,
+            borderBottom: '1px solid black',
+            margin: '5px 0 10px',
+          }}
+        />
+      </div>
       <div className={classes.flexContainer}>
         {data.allInstaNode.edges.map(x => {
           return (

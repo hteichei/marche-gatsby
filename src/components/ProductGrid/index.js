@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   flexContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
 })
 

@@ -1,118 +1,100 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, Fragment } from 'react'
 import { Link } from 'gatsby'
-import { makeStyles } from '@material-ui/styles'
-import { List, ListItem, ListItemText, withStyles } from '@material-ui/core'
-import {
-  FaInstagram,
-  FaFacebookSquare,
-  FaPinterestSquare,
-} from 'react-icons/fa'
+import { MdMenu } from 'react-icons/md'
+import { IconButton } from '@material-ui/core'
+import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery'
 
-import { navItems, shopItems, subNav } from './helpers'
+import Cart from '../Cart'
+import { CartMenuItem } from './cart-menu-item'
+import Drawer from '../Drawer/drawer'
+import StoreContext from '../../context/StoreContext'
+import { useStyles } from './layout-styles'
 
-const useStyles = makeStyles({
-  container: {
-    marginLeft: 40,
-    position: 'absolute',
-    left: 0,
-    top: 50,
-  },
-  title: {
-    fontFamily: 'Oswald',
-    fontSize: 36,
-    fontWeight: 500,
-    marginBottom: 30,
-  },
-  iconContainer: {
-    display: 'flex',
-    width: 60,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-})
-
-export const Layout = () => {
-  const [open, setOpen] = useState(false)
+export const MarcheNavbar = () => {
+  // Hooks
+  const [openDialog, setOpenDialog] = useState(false)
+  const [drawerState, setDrawerState] = useState({
+    top: false,
+  })
+  const context = useContext(StoreContext)
   const classes = useStyles()
+  const isMobile = useMediaQuery('(max-width: 780px)')
 
-  return (
-    <div className={classes.container}>
-      <p className={classes.title}>LE MARCHÉ</p>
-      <List>
-        {navItems.map((item, idx) =>
-          item.label === 'Shop' ? (
+  // Handlers
+  const toggleDrawerState = (side, open) => () => {
+    setDrawerState({ ...drawerState, [side]: open })
+  }
+  const handleCloseDialog = () => setOpenDialog(false)
+  const handleOpenDialog = () => setOpenDialog(true)
+
+  const { lineItems } = context.checkout
+  if (isMobile) {
+    return (
+      <Fragment>
+        <div className={classes.container}>
+          <CartMenuItem
+            lineItems={lineItems}
+            handleOpenDialog={handleOpenDialog}
+          />
+          <Link className={classes.link} to="/">
             <div>
-              <StyledListItem
-                key={idx}
-                onClick={() => setOpen(!open)}
-                component={Link}
-                to={`${item.link}`}
-              >
-                <StyledListItemText primary={item.label} />
-              </StyledListItem>
-              {open && (
-                <List style={{ marginLeft: 20 }}>
-                  {shopItems.map((item, idx) => (
-                    <StyledListItem
-                      key={idx}
-                      component={Link}
-                      to={`${item.link}`}
-                    >
-                      <StyledListItemText primary={item.label} />
-                    </StyledListItem>
-                  ))}
-                </List>
-              )}
+              <img
+                src={require(`../../images/marche-logo.svg`)}
+                alt="logo"
+                className={classes.logo}
+              />
             </div>
-          ) : (
-            <StyledListItem key={idx} component={Link} to={`${item.link}`}>
-              <StyledListItemText primary={item.label} />
-            </StyledListItem>
-          )
-        )}
-      </List>
-      <List style={{ marginTop: 15 }}>
-        {subNav.map((item, idx) => (
-          <StyledListItem key={idx} component={Link} to={`${item.link}`}>
-            <StyledListItemTextAlt primary={item.label} />
-          </StyledListItem>
-        ))}
-      </List>
-      <div className={classes.iconContainer}>
-        <FaInstagram />
-        <FaPinterestSquare />
-        <FaFacebookSquare />
-      </div>
-    </div>
-  )
+          </Link>
+          <IconButton
+            onClick={toggleDrawerState('top', !drawerState.top)}
+            style={{ outline: 'none' }}
+          >
+            <MdMenu size={25} />
+          </IconButton>
+        </div>
+        <Cart openDialog={openDialog} handleClose={handleCloseDialog} />
+        <Drawer open={drawerState.top} toggleDrawer={toggleDrawerState} />
+      </Fragment>
+    )
+  } else
+    return (
+      <Fragment>
+        <div className={classes.container}>
+          <Link className={classes.link} to="/">
+            <div>
+              <img
+                src={require(`../../images/marche-logo.svg`)}
+                alt="logo"
+                className={classes.logo}
+              />
+            </div>
+          </Link>
+          <div style={{ width: 400 }}>
+            <ul className={classes.navList}>
+              <Link to="/products" className={classes.link}>
+                <li>Shop</li>
+              </Link>
+              <li>
+                <Link className={classes.link} to="/about">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link className={classes.link} to="/contact">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <CartMenuItem
+                  lineItems={lineItems}
+                  handleOpenDialog={handleOpenDialog}
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <Cart openDialog={openDialog} handleClose={handleCloseDialog} />
+        <Drawer open={drawerState.top} toggleDrawer={toggleDrawerState} />
+      </Fragment>
+    )
 }
-
-const StyledListItemText = withStyles({
-  primary: {
-    fontFamily: 'Oswald',
-    textTransform: 'uppercase',
-    fontSize: 20,
-    '&:hover': {
-      color: 'rgba(0,0,0,.4)',
-    },
-  },
-})(ListItemText)
-
-const StyledListItemTextAlt = withStyles({
-  primary: {
-    fontFamily: 'Oswald',
-    fontSize: 15,
-    '&:hover': {
-      color: 'rgba(0,0,0,.4)',
-    },
-  },
-})(ListItemText)
-
-const StyledListItem = withStyles({
-  root: {
-    padding: '2px 2px',
-  },
-  selected: {
-    color: 'rgba(0,0,0,.4)',
-  },
-})(ListItem)

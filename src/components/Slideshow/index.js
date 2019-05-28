@@ -5,12 +5,20 @@ import { makeStyles } from '@material-ui/styles'
 const useStyles = makeStyles({
   imageContainer: {
     width: '100%',
-    height: '100vh',
+    height: '92.25vh',
+    position: 'relative',
   },
   image: {
+    display: 'block',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center',
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    overflow: 'hidden',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 1,
   },
 })
 
@@ -19,10 +27,12 @@ export const Slideshow = ({ images, slideProperties }) => {
   return (
     <Slide {...slideProperties}>
       {images.map((img, idx) => (
-        <div key={idx}>
-          <div className={classes.imageContainer}>
-            <img src={img} className={classes.image} />
-          </div>
+        <div className={classes.imageContainer} key={idx}>
+          <div
+            key={idx}
+            className={classes.image}
+            style={{ backgroundImage: `url(${img})` }}
+          />
         </div>
       ))}
     </Slide>
@@ -31,17 +41,17 @@ export const Slideshow = ({ images, slideProperties }) => {
 
 Slideshow.defaultProps = {
   images: [
-    require('./assets/IMG_1.jpg'),
-    require('./assets/IMG_2.jpg'),
-    require('./assets/IMG_3.jpg'),
-    require('./assets/IMG_4.jpg'),
-    require('./assets/IMG_5.jpg'),
+    require('./assets/IMG_33.jpg'),
+    require('./assets/IMG_11.jpg'),
+    require('./assets/IMG_55.jpg'),
+    require('./assets/IMG_88.jpg'),
+    require('./assets/IMG_77.jpg'),
   ],
   slideProperties: {
-    duration: 5000,
-    autoplay: true,
+    duration: 4000,
+    autoplay: false,
     arrows: true,
-    transitionDuration: 500,
+    transitionDuration: 425,
     infinite: true,
     indicators: false,
   },

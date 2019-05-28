@@ -60,7 +60,6 @@ const Header = ({ siteTitle }) => {
 
   return (
     <Wrapper>
-      {/* <Container> */}
       <Box>
         <H1 to="/">{siteTitle}</H1>
       </Box>
@@ -72,7 +71,6 @@ const Header = ({ siteTitle }) => {
           Cart 🛍
         </H1>
       </Box>
-      {/* </Container> */}
     </Wrapper>
   )
 }

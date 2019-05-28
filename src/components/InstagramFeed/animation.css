@@ -1,0 +1,21 @@
+.icon {
+  animation-name: slidein;
+  animation-duration: 0.25s;
+  position: absolute;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slidein {
+  0% {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  100% {
+    bottom: 40%;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}

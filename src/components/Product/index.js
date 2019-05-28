@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
@@ -9,6 +10,7 @@ const Product = ({ handle, images, title, price }) => {
   const classes = useStyles()
 
   const [priceShow, setPrice] = useState(false)
+  const isMobile = useMediaQuery('(max-width: 780px)')
   return (
     <div
       className={classes.container}
@@ -23,7 +25,11 @@ const Product = ({ handle, images, title, price }) => {
         />
       </Link>
       <p className={classes.label}>{title}</p>
-      <p className={priceShow ? classes.priceShow : classes.priceHide}>
+      <p
+        className={
+          priceShow || isMobile ? classes.priceShow : classes.priceHide
+        }
+      >
         ${price}
       </p>
     </div>

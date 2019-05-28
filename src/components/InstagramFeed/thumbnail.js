@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { PropTypes } from 'prop-types'
 import { FaInstagram } from 'react-icons/fa'
 
+import './animation.css'
 import { useStyles } from './styles'
 
 export const Thumb = ({ id, original, caption }) => {
@@ -18,7 +19,7 @@ export const Thumb = ({ id, original, caption }) => {
       onMouseLeave={() => setBlur(false)}
     >
       <div className={blur ? classes.showBlur : classes.hideBlur}>
-        <FaInstagram color="#fff" size={35} />
+        <FaInstagram color="#fff" size={35} className="icon" />
       </div>
       <img src={original} alt={caption} className={classes.img} />
     </a>

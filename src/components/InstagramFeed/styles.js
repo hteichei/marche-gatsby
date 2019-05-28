@@ -2,21 +2,16 @@ import { makeStyles } from '@material-ui/styles'
 
 export const useStyles = makeStyles({
   container: {
-    height: 400,
+    height: 'auto',
     width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: '90px 0',
   },
   flexContainer: {
     display: 'flex',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: '100%',
-    height: 240,
     '@media (max-width: 780px)': {
-      height: 480,
       flexWrap: 'wrap',
     },
   },
@@ -27,9 +22,6 @@ export const useStyles = makeStyles({
     top: 0,
     left: 0,
     backgroundColor: 'rgba(0,0,0,.4)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   hideBlur: {
     display: 'none',
@@ -51,7 +43,6 @@ export const useStyles = makeStyles({
   },
   '@media (max-width: 780px)': {
     flexContainer: {
-      height: 480,
       flexWrap: 'wrap',
       alignContent: 'center',
     },
@@ -60,8 +51,7 @@ export const useStyles = makeStyles({
       width: '33.332%',
     },
     container: {
-      height: 550,
-      paddingTop: 40,
+      paddingTop: 90,
     },
   },
 })
