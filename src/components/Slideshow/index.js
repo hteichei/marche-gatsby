@@ -30,11 +30,7 @@ export const Slideshow = ({ images, slideProperties }) => {
     <Slide {...slideProperties}>
       {images.map((img, idx) => (
         <div className={classes.imageContainer} key={idx}>
-          <div
-            key={idx}
-            className={classes.image}
-            style={{ backgroundImage: `url(${`${img}`})` }}
-          />
+          <img key={idx} className={classes.image} src={img} />
         </div>
       ))}
     </Slide>
@@ -42,13 +38,7 @@ export const Slideshow = ({ images, slideProperties }) => {
 }
 
 Slideshow.defaultProps = {
-  images: [
-    '../../images/img_11.jpg',
-    '../../images/img_33.jpg',
-    '../../images/img_55.jpg',
-    '../../images/img_77.jpg',
-    '../../images/img_88.jpg',
-  ],
+  images: [img_11, img_33, img_55, img_77, img_88],
   slideProperties: {
     duration: 4000,
     autoplay: false,
