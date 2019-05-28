@@ -41,11 +41,11 @@ export const Slideshow = ({ images, slideProperties }) => {
 
 Slideshow.defaultProps = {
   images: [
-    require('./assets/IMG_33.jpg'),
-    require('./assets/IMG_11.jpg'),
-    require('./assets/IMG_55.jpg'),
-    require('./assets/IMG_88.jpg'),
-    require('./assets/IMG_77.jpg'),
+    require('./assets/img_33.jpg'),
+    require('./assets/img_11.jpg'),
+    require('./assets/img_55.jpg'),
+    require('./assets/img_88.jpg'),
+    require('./assets/img_77.jpg'),
   ],
   slideProperties: {
     duration: 4000,
