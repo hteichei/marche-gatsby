@@ -2,7 +2,7 @@ import React from 'react'
 import { Slide } from 'react-slideshow-image'
 import { makeStyles } from '@material-ui/styles'
 
-import { img_11, img_33, img_55, img_77, img_88 } from '../../images/assets'
+import { img_11, img_33, img_55, img_77, img_88 } from '../../images'
 
 const useStyles = makeStyles({
   imageContainer: {
@@ -33,7 +33,7 @@ export const Slideshow = ({ images, slideProperties }) => {
           <div
             key={idx}
             className={classes.image}
-            style={{ backgroundImage: `url(${img})` }}
+            style={{ backgroundImage: `url(${`${img}`})` }}
           />
         </div>
       ))}
@@ -42,13 +42,12 @@ export const Slideshow = ({ images, slideProperties }) => {
 }
 
 Slideshow.defaultProps = {
-  // images: [img_33, img_11, img_55, img_88, img_77],
   images: [
-    '../../images/assets/img_11.jpg',
-    '../../images/assets/img_33.jpg',
-    '../../images/assets/img_55.jpg',
-    '../../images/assets/img_77.jpg',
-    '../../images/assets/img_88.jpg',
+    '../../images/img_11.jpg',
+    '../../images/img_33.jpg',
+    '../../images/img_55.jpg',
+    '../../images/img_77.jpg',
+    '../../images/img_88.jpg',
   ],
   slideProperties: {
     duration: 4000,
