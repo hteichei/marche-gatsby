@@ -2,7 +2,7 @@ import React from 'react'
 import { Slide } from 'react-slideshow-image'
 import { makeStyles } from '@material-ui/styles'
 
-import { img_11, img_33, img_55, img_77, img_88 } from './assets'
+import { img_11, img_33, img_55, img_77, img_88 } from '../../images/assets'
 
 const useStyles = makeStyles({
   imageContainer: {
