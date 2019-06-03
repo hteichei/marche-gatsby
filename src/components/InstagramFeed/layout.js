@@ -9,14 +9,15 @@ export const Layout = ({ data }) => {
   const [instaImages, setInstaImages] = useState([])
   const classes = useStyles()
   useEffect(() => {
-    console.log('data', data)
     setInstaImages(
-      data.allInstaNode.edges.filter(
-        img => img.node.id !== 'BsKgYBNFzxM' && img.node.id !== 'BxNhiHYHOG3'
-      )
+      // Filtering out problematic imagees.  Slice to limit length of array to 6
+      data.allInstaNode.edges
+        .filter(
+          img => img.node.id !== 'BsKgYBNFzxM' && img.node.id !== 'BxNhiHYHOG3'
+        )
+        .slice(0, 6)
     )
   }, [])
-  console.log('instaImages', instaImages)
 
   return (
     <div className={classes.container}>
