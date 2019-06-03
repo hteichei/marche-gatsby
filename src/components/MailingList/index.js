@@ -96,4 +96,12 @@ export const StyledButton = withStyles({
     padding: 4,
     backgroundColor: '#fff',
   },
+  disabled: {
+    borderRadius: 2,
+    border: '1px solid #636363',
+    color: 'black',
+    fontFamily: 'Oswald',
+    padding: 4,
+    backgroundColor: '#fff',
+  },
 })(Button)

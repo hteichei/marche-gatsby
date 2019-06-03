@@ -4,12 +4,10 @@ export const useInstaData = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        allInstaNode(limit: 6) {
+        allInstaNode(limit: 8) {
           edges {
             node {
               id
-              likes
-              comments
               mediaType
               preview
               original
