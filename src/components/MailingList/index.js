@@ -18,6 +18,14 @@ const useStyles = makeStyles({
     border: '1px solid #636363',
     backgroundColor: '#fff',
   },
+  disabled: {
+    borderRadius: 2,
+    border: '1px solid #636363',
+    color: 'rgb(161,161,161)',
+    fontFamily: 'Oswald',
+    padding: 4,
+    backgroundColor: '#fff',
+  },
   form: {
     width: 300,
     '@media (max-width: 400px)': {
@@ -79,7 +87,12 @@ export const Subscribe = () => {
             }}
           />
         </div>
-        <StyledButton disabled={!email.length} type="submit" id="subscribe">
+        <StyledButton
+          classes={{ disabled: classes.disabled }}
+          disabled={!email.length}
+          type="submit"
+          id="subscribe"
+        >
           {loading ? <CircularProgress size={15} /> : 'Join'}
         </StyledButton>
       </form>
@@ -89,14 +102,6 @@ export const Subscribe = () => {
 
 export const StyledButton = withStyles({
   root: {
-    borderRadius: 2,
-    border: '1px solid #636363',
-    color: 'black',
-    fontFamily: 'Oswald',
-    padding: 4,
-    backgroundColor: '#fff',
-  },
-  disabled: {
     borderRadius: 2,
     border: '1px solid #636363',
     color: 'black',
